@@ -1,4 +1,4 @@
-import { Card } from "./Model";
+import { Card } from "./Card.model";
 
 export interface Amiibo{
   amiibo: Card[]

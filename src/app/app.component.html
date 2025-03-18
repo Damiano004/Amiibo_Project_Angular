@@ -1,9 +1,2 @@
-<button (click)="cardManagerService.CallGetHTTP()">GET AMIIBOS</button>
-
-<div class="post_container">
-  @for (card of cardManagerService.amiiboListComp(); track cardManagerService.HexToDec(card.head)) {
-    <app-amiibo-card [card]="card"></app-amiibo-card>
-  }@empty {
-    <h1>NESSUN POST DISPONIBILE</h1>
-  }
-</div>
+<h1>Amiibo App</h1>
+<router-outlet/>

@@ -1,5 +1,5 @@
 import { Component, input} from '@angular/core';
-import { Card } from '../../Core/Model';
+import { Card } from '../../Core/Models/Card.model';
 
 @Component({
   selector: 'app-amiibo-card',
