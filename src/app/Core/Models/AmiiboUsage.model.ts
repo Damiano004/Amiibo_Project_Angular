@@ -1,4 +1,4 @@
 export interface AmiiboUsage{
-  usage: string,
+  amiiboUsage:  { [key: string]: string }[],
   gameName: string
 }

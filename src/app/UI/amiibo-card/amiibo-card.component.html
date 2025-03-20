@@ -2,4 +2,5 @@
   <h1>{{card().name}}</h1><br>
   <img src="{{card().image}}" alt="" height="200px" width="200px"><br>
   <h3>From: {{card().gameSeries}}</h3>
+  <button (click)="goToDetails(card().head,card().tail)">Dettagli</button>
 </div>

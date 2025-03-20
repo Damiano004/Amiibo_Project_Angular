@@ -1,1 +1,8 @@
+@let amiiboDetail = cardMangerSrv.GetAmiiboFromID(head(),tail());
 
+@if (amiiboDetail.head == "-1" || amiiboDetail.tail == "-1"){
+  <h1>HEAD: {{amiiboDetail.head}}</h1>
+  <h1>TAIL: {{amiiboDetail.tail}}</h1>
+  <h1>NAME: {{amiiboDetail.name}}</h1>
+  <!-- <app-UsageTable [tableName]="'Nintendo switch games'" [usage]="amiiboDetail.gamesSwitch()"></app-UsageTable> -->
+}

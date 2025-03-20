@@ -28,22 +28,19 @@ export class CardManagerService {
 
   amiiboListComp = computed(() => this.#amiiboList());
 
-
-constructor() { }
-
-  GetAmiiboFromID(id: string):void{
+  GetAmiiboFromID(head: string, tail: string):Card{
     this.#amiiboList().forEach((amiibo)  =>{
       let amiiboId;
       amiiboId = amiibo.head + amiibo.tail;
     })
-    let head = id.slice(0,8);
-    let tail = id.slice(8)
-    console.log("Find name: "+this.#amiiboList().find(p => p.head === head && p.tail === tail)?.name +" From head: "+head+" + tail: "+ tail);
-
+    console.log("[received] Amiibo head: "+head+" Amiibo tail: "+tail);
+    let amiibo: Card = this.#amiiboList().find(p => p.head === head && p.tail === tail) ?? this.#defaultCard;
+    console.log("Amiibo name: "+amiibo.name+" Amiibo head: "+amiibo.head+" Amiibo tail: "+amiibo.tail);
+    return amiibo;
   }
 
   CallGetHTTP():void{
-    this.#http.get<Amiibo>(this.#URL+"/?showusage")
+    this.#http.get<Amiibo>(this.#URL+"?showusage")
     .pipe(
       retry(3),
       catchError((err)=>{

@@ -1,5 +1,4 @@
 <button (click)="cardManagerService.CallGetHTTP()">GET AMIIBOS</button>
-<button (click)="cardManagerService.GetAmiiboFromID('3f000000042e0002')">GET AMIIBO FROM ID</button>
 
 <div class="post_container">
   @for (card of cardManagerService.amiiboListComp(); track cardManagerService.amiiboListComp().indexOf(card)) {

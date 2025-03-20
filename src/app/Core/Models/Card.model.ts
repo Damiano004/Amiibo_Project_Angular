@@ -10,3 +10,4 @@ export interface Card{
   gamesSwitch: AmiiboUsage[],
   gamesWiiU: AmiiboUsage[]
 }
+
