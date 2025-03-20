@@ -1,8 +1,14 @@
-@let amiiboDetail = cardMangerSrv.GetAmiiboFromID(head(),tail());
+@let amiiboDetail = cardMangerSrv.GetAmiiboFromID(head,tail);
 
 @if (amiiboDetail.head == "-1" || amiiboDetail.tail == "-1"){
   <h1>HEAD: {{amiiboDetail.head}}</h1>
   <h1>TAIL: {{amiiboDetail.tail}}</h1>
   <h1>NAME: {{amiiboDetail.name}}</h1>
-  <!-- <app-UsageTable [tableName]="'Nintendo switch games'" [usage]="amiiboDetail.gamesSwitch()"></app-UsageTable> -->
+}@else {
+  <h3>NAME: {{amiiboDetail.name}}</h3>
+  <h3>FROM: {{amiiboDetail.gameSeries}}</h3>
+  <img [src]="amiiboDetail.image" alt=":D" height="600px" width="600px">
+  <app-UsageTable [tableName]="'Nintendo switch games'" [tableData]="amiiboDetail.gamesSwitch"></app-UsageTable>
+  <app-UsageTable [tableName]="'Nintendo 3DS games'" [tableData]="amiiboDetail.games3DS"></app-UsageTable>
+  <app-UsageTable [tableName]="'Nintendo WIIU games'" [tableData]="amiiboDetail.gamesWiiU"></app-UsageTable>
 }

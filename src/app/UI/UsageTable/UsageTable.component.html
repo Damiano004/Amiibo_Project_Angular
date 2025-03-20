@@ -1,6 +1,6 @@
-<!-- @if(tableData().amiiboUsage.length > 0){
+@if(tableData().length > 0){
   <div>
-    <h1>{{tableName()}}</h1><br>
+    <h1>{{tableName()}}</h1>
     <table>
       <thead>
         <tr>
@@ -9,9 +9,9 @@
         </tr>
       </thead>
       <tbody>
-        @for (data of tableData; track tableData.indexOf(data)){
+        @for (data of tableData(); track tableData().indexOf(data)){
           <tr>
-            <td>{{data.amiiboUsage[0]}}</td>
+            <td>{{data.amiiboUsage[0]["Usage"]}}</td>
             <td>{{data.gameName}}</td>
           </tr>
         }
@@ -19,5 +19,5 @@
     </table>
   </div>
 }@else {
-  <h1>nothing in  {{tableName}}</h1>
-} -->
+  <h1>nothing in  {{tableName()}}</h1>
+}
