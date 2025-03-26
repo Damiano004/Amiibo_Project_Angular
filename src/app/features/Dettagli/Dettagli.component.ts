@@ -3,6 +3,7 @@ import { AmiiboUsage } from '../../Core/Models/AmiiboUsage.model';
 import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manager.service';
 import { UsageTableComponent } from "../../UI/UsageTable/UsageTable.component";
 import { ActivatedRoute } from '@angular/router';
+import { CommentManagerService } from '../../Core/Services/Comment-Manager/Comment-Manager.service';
 
 @Component({
   selector: 'app-Dettagli',
@@ -11,12 +12,13 @@ import { ActivatedRoute } from '@angular/router';
   imports: [UsageTableComponent]
 })
 export class DettagliComponent implements OnInit{
-  readonly cardMangerSrv = inject(CardManagerService)
+  readonly cardMangerSrv = inject(CardManagerService);
+  readonly commentManagerSrv = inject(CommentManagerService);
 
   head: string = "";
   tail: string = "";
 
-  readonly router = inject(ActivatedRoute)
+  readonly router = inject(ActivatedRoute);
 
   readonly name = input<string>();
   readonly gameSeries = input<string>();

@@ -1,9 +1,7 @@
-<button (click)="cardManagerService.CallGetHTTP()">GET AMIIBOS</button>
-
-<div class="post_container">
+<div class="amiibo_container">
   @for (card of cardManagerService.amiiboListComp(); track cardManagerService.amiiboListComp().indexOf(card)) {
     <app-amiibo-card [card]="card"></app-amiibo-card>
   }@empty {
-    <h1>NESSUN POST DISPONIBILE</h1>
+    <h1>NESSUN AMIIBO TROVATO, ATTENDERE...</h1>
   }
 </div>
