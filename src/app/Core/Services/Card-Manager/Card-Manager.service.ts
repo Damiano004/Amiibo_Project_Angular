@@ -12,7 +12,7 @@ export class CardManagerService {
   readonly #defaultCard: Card = {
     head: "-1",
     tail: "-1",
-    name: "AmiiboNotFound",
+    name: "AmiiboNotFound, please wait...",
     image: "",
     gameSeries: "",
     games3DS: [],
@@ -29,6 +29,9 @@ export class CardManagerService {
   amiiboListComp = computed(() => this.#amiiboList());
 
   GetAmiiboFromID(head: string, tail: string):Card{
+    if(this.#amiiboList().length === 0){
+      this.CallGetHTTP();
+    }
     this.#amiiboList().forEach((amiibo)  =>{
       let amiiboId;
       amiiboId = amiibo.head + amiibo.tail;

@@ -1,15 +1,16 @@
-import { Component, inject, Input, input, OnInit } from '@angular/core';
+import { Component, inject, Input, input, model, OnInit } from '@angular/core';
 import { AmiiboUsage } from '../../Core/Models/AmiiboUsage.model';
 import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manager.service';
 import { UsageTableComponent } from "../../UI/UsageTable/UsageTable.component";
 import { ActivatedRoute } from '@angular/router';
 import { CommentManagerService } from '../../Core/Services/Comment-Manager/Comment-Manager.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-Dettagli',
   templateUrl: './Dettagli.component.html',
   styleUrls: ['./Dettagli.component.css'],
-  imports: [UsageTableComponent]
+  imports: [UsageTableComponent, FormsModule]
 })
 export class DettagliComponent implements OnInit{
   readonly cardMangerSrv = inject(CardManagerService);
@@ -18,6 +19,10 @@ export class DettagliComponent implements OnInit{
   head: string = "";
   tail: string = "";
 
+  uName = model.required<string>();
+  title = model.required<string>();
+  body  = model.required<string>();
+  
   readonly router = inject(ActivatedRoute);
 
   readonly name = input<string>();
@@ -30,6 +35,7 @@ export class DettagliComponent implements OnInit{
 
   ngOnInit(): void {
     this.router.paramMap.subscribe(param=> {
+      console.log(param.get("head"))
       this.head = param.get("head") ?? "-1";
       this.tail = param.get("tail") ?? "-1";
     })
