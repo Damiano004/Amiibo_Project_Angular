@@ -31,9 +31,9 @@
         [(ngModel)]="body"
     >
     @let newComment = {
-      'user': uName(),
-      'title': title(),
-      'body': body()};
+      'user': uName() ?? "",
+      'title': title() ?? "",
+      'body': body() ?? ""};
     <button (click)="commentManagerSrv.AddComment(amiiboDetail.head+amiiboDetail.tail,newComment)">
       SUBMIT
     </button>

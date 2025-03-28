@@ -19,10 +19,10 @@ export class DettagliComponent implements OnInit{
   head: string = "";
   tail: string = "";
 
-  uName = model.required<string>();
-  title = model.required<string>();
-  body  = model.required<string>();
-  
+  uName = model<string>();
+  title = model<string>();
+  body  = model<string>();
+
   readonly router = inject(ActivatedRoute);
 
   readonly name = input<string>();
