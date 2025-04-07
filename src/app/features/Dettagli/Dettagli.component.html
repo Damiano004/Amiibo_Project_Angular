@@ -8,7 +8,7 @@
   <h3>NAME: {{amiiboDetail.name}}</h3>
   <h3>FROM: {{amiiboDetail.gameSeries}}</h3>
   <img [src]="amiiboDetail.image" alt="" height="600px" width="600px">
-  <!-- <form>
+  <form>
     <label for="user">user name</label>
     <input
         type="text"
@@ -29,15 +29,15 @@
         name="body"
         id="body"
         [(ngModel)]="body"
-    > -->
+    >
     @let newComment = {
-      'user': "cicco",
-      'title': "Prova {{amiiboDetail.name}}",
-      'body': "Questa è una prova di un commento sull'amibo di {{amiiboDetail.name}}"};
+      'user': uName() ?? "",
+      'title': title() ?? "",
+      'body': body() ?? ""};
     <button (click)="commentManagerSrv.AddComment(amiiboDetail.head+amiiboDetail.tail,newComment)">
       SUBMIT
     </button>
-  <!-- </form> -->
+  </form>
   @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail)?.comments; track $index) {
     <h2>Title: {{comment.title}}</h2>
     <h3>User: {{comment.user}}</h3>
