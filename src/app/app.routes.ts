@@ -6,12 +6,16 @@ import { DettagliComponent } from './features/Dettagli/Dettagli.component';
 export const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    loadComponent(){
+      return import('./features/Home/Home.component').then(m => m.HomeComponent);
+    }
   },
   {
     path: '',
     pathMatch: 'full',
-    component: HomeComponent
+    loadComponent(){
+      return import('./features/Home/Home.component').then(m => m.HomeComponent);
+    }
   },
   {
     path: 'dettagli', // /dettagli

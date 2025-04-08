@@ -28,7 +28,7 @@ export class CommentManagerService {
     {id: 'b', comments: [this.c3]}
   ]);
 
-  GetComments(id:string){
+  GetComments(id:string| undefined){
     if(id == null){
       console.log('Error: the insered id is null');
       return;

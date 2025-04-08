@@ -29,9 +29,6 @@ export class CardManagerService {
   amiiboListComp = computed(() => this.#amiiboList());
 
   GetAmiiboFromID(head: string, tail: string):Card{
-    if(this.#amiiboList().length === 0){
-      this.CallGetHTTP();
-    }
     this.#amiiboList().forEach((amiibo)  =>{
       let amiiboId;
       amiiboId = amiibo.head + amiibo.tail;

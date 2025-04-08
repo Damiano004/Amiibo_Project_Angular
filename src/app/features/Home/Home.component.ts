@@ -9,13 +9,7 @@ import { CommentManagerService } from '../../Core/Services/Comment-Manager/Comme
   imports: [AmiiboCardComponent],
   styleUrls: ['./Home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent{
   readonly cardManagerService = inject(CardManagerService);
   readonly commentManagerService = inject(CommentManagerService);
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.cardManagerService.CallGetHTTP();
-  }
 }
