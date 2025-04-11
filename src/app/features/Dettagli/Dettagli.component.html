@@ -1,3 +1,4 @@
+
 @let amiiboDetail = cardMangerSrv.GetAmiiboFromID(head,tail);
 <!--<button (click)="commentManagerSrv.AddComment(amiiboDetail.head+amiiboDetail.tail, {'user':'utente','body':'corpo','title':'titolo'})">Add comment</button> -->
 
@@ -9,33 +10,36 @@
   <h3>NAME: {{amiiboDetail.name}}</h3>
   <h3>FROM: {{amiiboDetail.gameSeries}}</h3>
   <img [src]="amiiboDetail.image" alt="" height="600px" width="600px">
-  <form>
-    <label for="user">user name</label>
+  <form [formGroup]="form" (ngSubmit)="sendComment()">
+    <label for="uName">user name</label>
     <input
         type="text"
         name="uName"
         id="uName"
-        [formControl]="uName"
+        autocomplete="off"
+        formControlName="user"
     >
     <label for="title">Title</label>
     <input
         type="text"
         name="title"
         id="title"
-        [formControl]="title"
+        autocomplete="off"
+        formControlName="title"
     >
     <label for="body">Body</label>
     <input
         type="text"
         name="body"
         id="body"
-        [formControl]="body"
+        autocomplete="off"
+        formControlName="body"
     >
-    <button (click)="sendComment()">
+    <button type="submit">
       SUBMIT
     </button>
   </form>
-  @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail)?.comments; track $index) {
+  @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail).comments; track $index) {
     <h2>Title: {{comment.title}}</h2>
     <h3>User: {{comment.user}}</h3>
     <h4>Body: {{comment.body}}</h4>

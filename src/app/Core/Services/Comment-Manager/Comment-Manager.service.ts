@@ -28,10 +28,10 @@ export class CommentManagerService {
     {id: 'b', comments: [this.c3]}
   ]);
 
-  GetComments(id:string| undefined){
-    if(id == null){
+  GetComments(id:string| undefined): Comments{
+    if(id === null){
       console.log('Error: the insered id is null');
-      return;
+      return this.defaultComments;
     }
     // let a = localStorage.getItem(id);
     // console.log("A: "+a);
@@ -46,8 +46,9 @@ export class CommentManagerService {
     // }
 
     //this.comments.update(currentValue => [...currentValue,])
-    let amiiboComment: Comments = this.comments().find(c => c.id === id) ?? this.defaultComments;
-    console.log('Comment: '+amiiboComment);
+    let c = this.comments().find(c => c.id === id);
+    let amiiboComment: Comments = c !== undefined ? c : this.defaultComments;
+    console.log('Comment: ',amiiboComment);
     return amiiboComment;
   }
 
