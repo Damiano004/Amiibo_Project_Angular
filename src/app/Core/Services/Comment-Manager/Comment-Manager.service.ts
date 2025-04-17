@@ -6,27 +6,9 @@ import { Comments } from '../../Models/Comments.model';
 })
 export class CommentManagerService {
 
-  c1 = {
-    title: 't1',
-    user: 'u1',
-    body: 'b1'
-  };
-  c2 = {
-    title: 't2',
-    user: 'u2',
-    body: 'b2'
-  };
-  c3 = {
-    title: 't3',
-    user: 'u3',
-    body: 'b3'
-  };
   defaultComments: Comments = {id: '-1', comments: []};
 
-  comments = signal<Comments[]>([
-    {id: 'a', comments: [this.c1, this.c2]},
-    {id: 'b', comments: [this.c3]}
-  ]);
+  comments = signal<Comments[]>([]);
 
   GetComments(id:string| undefined): Comments{
     if(id === null){
@@ -46,9 +28,7 @@ export class CommentManagerService {
     // }
 
     //this.comments.update(currentValue => [...currentValue,])
-    let c = this.comments().find(c => c.id === id);
-    let amiiboComment: Comments = c !== undefined ? c : this.defaultComments;
-    console.log('Comment: ',amiiboComment);
+    let amiiboComment = this.comments().find(c => c.id === id) ?? this.defaultComments;
     return amiiboComment;
   }
 
@@ -73,17 +53,15 @@ export class CommentManagerService {
           ...currentComments.slice(0, index),
           updatedComment,
           ...currentComments.slice(index + 1)
-        ]
+        ];
       }
       const newComment = {
         id,
         comments: [comment]
       };
-      return [...currentComments, newComment];;
+      return [...currentComments, newComment];
     });
-    console.log("added comment: "+id+"\nComment length: "+this.comments().length)
-    //this.comments.update(currentItems => [...currentItems,newComment])
-    //console.log("writing comment: "+JSON.stringify(this.comments().filter(c => c.id === id) ?? this.c1));
-    //localStorage.setItem(id,JSON.stringify(this.comments().filter(c => c.id === id) ?? this.c1))
+    console.log("added comment: "+id+"\nComment length: "+this.comments().length);
+    localStorage.setItem(id,JSON.stringify(this.comments().filter(c => c.id === id) ?? this.defaultComments.comments[0]));
   }
 }

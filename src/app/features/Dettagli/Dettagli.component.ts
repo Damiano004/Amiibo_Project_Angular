@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, OnInit, signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit} from '@angular/core';
 import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manager.service';
 import { UsageTableComponent } from "../../UI/UsageTable/UsageTable.component";
 import { ActivatedRoute } from '@angular/router';
@@ -22,9 +22,9 @@ export class DettagliComponent implements OnInit{
   head: string = "";
   tail: string = "";
 
-  uName = new FormControl<string>('', [Validators.required]);
-  title = new FormControl<string>('', [Validators.required]);
-  body  = new FormControl<string>('', [Validators.required]);
+  uName = new FormControl<string>('');
+  title = new FormControl<string>('');
+  body  = new FormControl<string>('');
 
   readonly name = input<string>();
 
@@ -41,9 +41,6 @@ export class DettagliComponent implements OnInit{
       this.tail = param.get("tail") ?? "-1";
 
     })
-
-
-
 
     this.form = new FormGroup(  {
       user: new FormControl(''),
