@@ -3,20 +3,26 @@ import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manage
 import { UsageTableComponent } from "../../UI/UsageTable/UsageTable.component";
 import { ActivatedRoute } from '@angular/router';
 import { CommentManagerService } from '../../Core/Services/Comment-Manager/Comment-Manager.service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { CommentComponent } from "../../UI/comment/comment.component";
+import { ButtonModule } from 'primeng/button';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { TextareaModule } from 'primeng/textarea';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-Dettagli',
   templateUrl: './Dettagli.component.html',
   styleUrls: ['./Dettagli.component.scss'],
-  imports: [UsageTableComponent, ReactiveFormsModule, CommentComponent],
+  imports: [UsageTableComponent, ReactiveFormsModule, CommentComponent, ButtonModule,InputGroupModule,InputGroupAddonModule,TextareaModule, FloatLabelModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DettagliComponent implements OnInit{
   readonly cardMangerSrv = inject(CardManagerService);
   readonly commentManagerSrv = inject(CommentManagerService);
   readonly #router = inject(ActivatedRoute);
+
 
   form!: FormGroup;
 
@@ -26,10 +32,10 @@ export class DettagliComponent implements OnInit{
   readonly name = input<string>();
 
   sendComment(): void{
-    let result = this.form.value;
-    console.log(result)
     let comment =this.form.value;
+    console.log("Sending comment: "+ comment.uName);
     this.commentManagerSrv.AddComment(this.head+this.tail, comment);
+    this.form.reset();
   }
 
   ngOnInit(): void {

@@ -19,7 +19,8 @@ export class CommentManagerService {
     return amiiboComment;
   }
 
-  AddComment(id: string, comment: {user: string, title: string, body: string}){
+  AddComment(id: string, comment: any){
+    console.log("Received comment: "+comment.user);
     if(id == null){
       console.log('Error: the insered id is null');
       return;

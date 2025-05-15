@@ -3,7 +3,7 @@
 export interface Comments{
   id: string,
   comments: {
-    user: string,
+    uName: string,
     title: string,
     body: string
   }[]

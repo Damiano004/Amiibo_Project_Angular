@@ -10,7 +10,7 @@
   <h3>NAME: {{amiiboDetail.name}}</h3>
   <h3>FROM: {{amiiboDetail.gameSeries}}</h3>
   <img [src]="amiiboDetail.image" alt="" height="600px" width="600px">
-  <form [formGroup]="form">
+  <!-- <form [formGroup]="form">
     <label for="uName">user name</label>
     <input
         type="text"
@@ -38,12 +38,36 @@
     <button type="submit" (click)="sendComment()">
       SUBMIT
     </button>
-  </form>
+  </form> -->
   <app-UsageTable [tableName]="'Nintendo switch games'" [tableData]="amiiboDetail.gamesSwitch"/>
   <app-UsageTable [tableName]="'Nintendo 3DS games'" [tableData]="amiiboDetail.games3DS"/>
   <app-UsageTable [tableName]="'Nintendo WIIU games'" [tableData]="amiiboDetail.gamesWiiU"/>
+  <br><br>
+  <form [formGroup]="form">
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-user"></i>
+      </p-inputgroup-addon>
+      <input formControlName="uName" placeholder="Username" />
+    </p-inputgroup>
+
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-tag"></i>
+      </p-inputgroup-addon>
+      <input formControlName="title" placeholder="Title" />
+    </p-inputgroup>
+
+    <p-floatlabel variant="in">
+      <textarea pTextarea id="over_label" formControlName="body" rows="5" cols="60" style="resize: none" class="h-full"></textarea>
+      <label for="in_label">Body</label>
+    </p-floatlabel>
+
+    <p-button (onClick)="sendComment()" label="Submit"/>
+  </form>
+
   @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail).comments; track $index) {
-    <app-comment [user]="comment.user" [title]="comment.title" [body]="comment.body"/>
+    <app-comment [user]="comment.uName" [title]="comment.title" [body]="comment.body"/>
   }@empty {
     <h1>NO COMMENTS ABOUT THIS AMIIBO</h1>
   }

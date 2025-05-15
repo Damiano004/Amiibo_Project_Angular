@@ -1,21 +1,22 @@
 @if(tableData().length > 0){
-  <div>
-    <h1>{{tableName()}}</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>USAGE</th>
-          <th>GAME</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (data of tableData(); track tableData().indexOf(data)){
-          <tr>
-            <td>{{data.amiiboUsage[0]["Usage"]}}</td>
-            <td>{{data.gameName}}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  <h1>{{tableName()}}</h1>
+  <p-table
+    [value]="tableData()"
+    showGridlines
+    stripedRows
+    [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+            <tr>
+                <th>USAGE</th>
+                <th>GAME</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-usage>
+            <tr>
+                <td style="width: 70%;">{{ usage.amiiboUsage[0]["Usage"] }}</td>
+                <td style="width: 30%;">{{ usage.gameName }}</td>
+            </tr>
+        </ng-template>
+  </p-table>
+  <br>
 }
