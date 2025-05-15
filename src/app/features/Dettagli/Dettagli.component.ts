@@ -4,12 +4,13 @@ import { UsageTableComponent } from "../../UI/UsageTable/UsageTable.component";
 import { ActivatedRoute } from '@angular/router';
 import { CommentManagerService } from '../../Core/Services/Comment-Manager/Comment-Manager.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommentComponent } from "../../UI/comment/comment.component";
 
 @Component({
   selector: 'app-Dettagli',
   templateUrl: './Dettagli.component.html',
-  styleUrls: ['./Dettagli.component.css'],
-  imports: [UsageTableComponent, ReactiveFormsModule],
+  styleUrls: ['./Dettagli.component.scss'],
+  imports: [UsageTableComponent, ReactiveFormsModule, CommentComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DettagliComponent implements OnInit{

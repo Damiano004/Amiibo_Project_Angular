@@ -39,13 +39,11 @@
       SUBMIT
     </button>
   </form>
-  <app-UsageTable [tableName]="'Nintendo switch games'" [tableData]="amiiboDetail.gamesSwitch"></app-UsageTable>
-  <app-UsageTable [tableName]="'Nintendo 3DS games'" [tableData]="amiiboDetail.games3DS"></app-UsageTable>
-  <app-UsageTable [tableName]="'Nintendo WIIU games'" [tableData]="amiiboDetail.gamesWiiU"></app-UsageTable>
+  <app-UsageTable [tableName]="'Nintendo switch games'" [tableData]="amiiboDetail.gamesSwitch"/>
+  <app-UsageTable [tableName]="'Nintendo 3DS games'" [tableData]="amiiboDetail.games3DS"/>
+  <app-UsageTable [tableName]="'Nintendo WIIU games'" [tableData]="amiiboDetail.gamesWiiU"/>
   @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail).comments; track $index) {
-    <h2>Title: {{comment.title}}</h2>
-    <h3>User: {{comment.user}}</h3>
-    <h4>Body: {{comment.body}}</h4>
+    <app-comment [user]="comment.user" [title]="comment.title" [body]="comment.body"/>
   }@empty {
     <h1>NO COMMENTS ABOUT THIS AMIIBO</h1>
   }

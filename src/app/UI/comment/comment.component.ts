@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
+import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.css']
+  styleUrls: ['./comment.component.scss'],
+  imports: [PanelModule]
 })
-export class CommentComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CommentComponent {
+  readonly user = input.required<string>();
+  readonly title = input.required<string>();
+  readonly body = input.required<string>();
 }
