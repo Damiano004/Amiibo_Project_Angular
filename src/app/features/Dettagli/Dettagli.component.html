@@ -35,10 +35,13 @@
         autocomplete="off"
         formControlName="body"
     >
-    <button type="submit">
+    <button type="submit" (click)="sendComment()">
       SUBMIT
     </button>
   </form>
+  <app-UsageTable [tableName]="'Nintendo switch games'" [tableData]="amiiboDetail.gamesSwitch"></app-UsageTable>
+  <app-UsageTable [tableName]="'Nintendo 3DS games'" [tableData]="amiiboDetail.games3DS"></app-UsageTable>
+  <app-UsageTable [tableName]="'Nintendo WIIU games'" [tableData]="amiiboDetail.gamesWiiU"></app-UsageTable>
   @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail).comments; track $index) {
     <h2>Title: {{comment.title}}</h2>
     <h3>User: {{comment.user}}</h3>
@@ -46,7 +49,4 @@
   }@empty {
     <h1>NO COMMENTS ABOUT THIS AMIIBO</h1>
   }
-  <app-UsageTable [tableName]="'Nintendo switch games'" [tableData]="amiiboDetail.gamesSwitch"></app-UsageTable>
-  <app-UsageTable [tableName]="'Nintendo 3DS games'" [tableData]="amiiboDetail.games3DS"></app-UsageTable>
-  <app-UsageTable [tableName]="'Nintendo WIIU games'" [tableData]="amiiboDetail.gamesWiiU"></app-UsageTable>
 }

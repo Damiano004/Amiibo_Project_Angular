@@ -22,10 +22,6 @@ export class DettagliComponent implements OnInit{
   head: string = "";
   tail: string = "";
 
-  uName = new FormControl<string>('');
-  title = new FormControl<string>('');
-  body  = new FormControl<string>('');
-
   readonly name = input<string>();
 
   sendComment(): void{
@@ -43,9 +39,9 @@ export class DettagliComponent implements OnInit{
     })
 
     this.form = new FormGroup(  {
-      user: new FormControl(''),
-      title: new FormControl(''),
-      body: new FormControl('')
+      uName: new FormControl<string>(''),
+      title: new FormControl<string>(''),
+      body: new FormControl<string>('')
     })
   }
 }

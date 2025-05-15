@@ -15,19 +15,6 @@ export class CommentManagerService {
       console.log('Error: the insered id is null');
       return this.defaultComments;
     }
-    // let a = localStorage.getItem(id);
-    // console.log("A: "+a);
-    // if(a){
-    //   let UwU: Comments = JSON.parse(a);
-    //   console.log("Parsed JSON: \n\tid: "+UwU.id+"\n\tuser: ");
-    //   console.log("found in local storage:");
-    //   console.log(UwU.id);
-    //   console.log(UwU.comment.user);
-    //   console.log(UwU.comment.title);
-    //   console.log(UwU.comment.body);
-    // }
-
-    //this.comments.update(currentValue => [...currentValue,])
     let amiiboComment = this.comments().find(c => c.id === id) ?? this.defaultComments;
     return amiiboComment;
   }
