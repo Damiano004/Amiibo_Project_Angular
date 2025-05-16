@@ -3,6 +3,7 @@ import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manage
 import { AmiiboCardComponent } from '../../UI/amiibo-card/amiibo-card.component';
 import { CommentManagerService } from '../../Core/Services/Comment-Manager/Comment-Manager.service';
 
+
 @Component({
   selector: 'app-Home',
   templateUrl: './Home.component.html',

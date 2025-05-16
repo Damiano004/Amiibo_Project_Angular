@@ -1,6 +1,20 @@
-<div>
+<!-- <div>
   <h1>{{card().name}}</h1><br>
   <img src="{{card().image}}" alt="" height="200px" width="200px"><br>
   <h3>From: {{card().gameSeries}}</h3>
   <button (click)="goToDetails(card().head,card().tail)">Dettagli</button>
-</div>
+</div> -->
+
+<p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+    <ng-template #header>
+        <img alt="Card" class="w-full" src="{{card().image}}" width="400px" height="400px"/>
+    </ng-template>
+    <ng-template #title> {{card().name.toLocaleUpperCase()}} </ng-template>
+    <p>{{card().gameSeries.toLocaleUpperCase()}}</p>
+    <!-- <ng-template #footer>
+        <div class="flex gap-4 mt-1">
+            <p-button label="Cancel" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" />
+            <p-button label="Save" class="w-full" styleClass="w-full" />
+        </div>
+    </ng-template> -->
+</p-card>

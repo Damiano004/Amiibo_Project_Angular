@@ -2,11 +2,13 @@ import { routes } from './../../app.routes';
 import { Component, inject, input} from '@angular/core';
 import { Card } from '../../Core/Models/Card.model';
 import { Router } from '@angular/router';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-amiibo-card',
   templateUrl: './amiibo-card.component.html',
-  styleUrls: ['./amiibo-card.component.scss']
+  styleUrls: ['./amiibo-card.component.scss'],
+  imports: [CardModule]
 })
 export class AmiiboCardComponent {
   readonly card = input.required<Card>();
