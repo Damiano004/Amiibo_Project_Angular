@@ -1,5 +1,10 @@
 <p-panel class="user_class">
-    <ng-container #header><i class="pi pi-user" style="font-size: 2.5rem"></i>&nbsp;{{user()}}</ng-container>
+    <ng-template #header>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <i class="pi pi-user" style="font-size: 2.5rem;"></i>
+        <span>{{user()}}</span>
+      </div>
+    </ng-template>
     <div class="m-0">
        <p class="title_class">{{title()}}</p>
        <p class="body_class">{{body()}}</p>

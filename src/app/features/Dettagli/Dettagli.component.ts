@@ -10,12 +10,13 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TextareaModule } from 'primeng/textarea';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { TagComponent } from "../../UI/tag/tag.component";
 
 @Component({
   selector: 'app-Dettagli',
   templateUrl: './Dettagli.component.html',
   styleUrls: ['./Dettagli.component.scss'],
-  imports: [UsageTableComponent, ReactiveFormsModule, CommentComponent, ButtonModule,InputGroupModule,InputGroupAddonModule,TextareaModule, FloatLabelModule],
+  imports: [UsageTableComponent, ReactiveFormsModule, CommentComponent, ButtonModule, InputGroupModule, InputGroupAddonModule, TextareaModule, FloatLabelModule, TagComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DettagliComponent implements OnInit{

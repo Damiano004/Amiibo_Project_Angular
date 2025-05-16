@@ -1,5 +1,5 @@
 @if(tableData().length > 0){
-  <h1>{{tableName()}}</h1>
+  <h1>{{tableName().toLocaleUpperCase()}}</h1>
   <p-table
     [value]="tableData()"
     showGridlines

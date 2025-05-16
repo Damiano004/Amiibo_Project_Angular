@@ -1,0 +1,33 @@
+.tag {
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border: 1px solid #ccc;
+}
+
+.tag_header {
+  background-color: rgb(179, 2, 2);
+  color: white;
+  padding: 0.01rem;
+  text-align: center;
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.tag_header_text{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.tag_body {
+  background-color: white;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: black;
+}
