@@ -1,7 +1,12 @@
 <div class="amiibo_container">
-  @for (card of cardManagerService.amiiboListComp(); track cardManagerService.amiiboListComp().indexOf(card)) {
+  @let amiibos = cardManagerService.getSplicedCards();
+  @for (card of amiibos; track $index) {
     <app-amiibo-card [card]="card"></app-amiibo-card>
   }@empty {
     <h1>NESSUN AMIIBO TROVATO, ATTENDERE...</h1>
   }
 </div>
+<div class="update_button">
+  <p-button label="SHOW MORE"  icon="pi pi-refresh" iconPos="bottom" (onClick)="cardManagerService.showMoreCards()" [disabled]="! activateButton()"/>
+</div>
+

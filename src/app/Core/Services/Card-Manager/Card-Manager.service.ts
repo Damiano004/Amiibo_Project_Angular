@@ -8,6 +8,8 @@ import { Amiibo } from '../../Models/Amiibo.model';
   providedIn: 'root'
 })
 export class CardManagerService {
+  maxCards: number = 51;
+  //readonly showingAmiibos = signal<Amiibo>;
 
   readonly #defaultCard: Card = {
     head: "-1",
@@ -39,7 +41,34 @@ export class CardManagerService {
     return amiibo;
   }
 
+  getSplicedCards():Card[]{
+    if(this.amiiboListComp().length == 0){
+      console.log("abiiboListComp is empty");
+      return [];
+    }
+    console.log("sto facendo robe :D "+this.maxCards)
+    if(this.maxCards>=this.amiiboListComp().length){
+      this.maxCards = this.amiiboListComp().length -1;
+    }
+    return this.amiiboListComp().slice(0,this.maxCards);
+  }
+
+  showMoreCards(): void{
+    this.maxCards+=51;
+  }
+
+  reachedMaxCards():boolean{
+    console.log("reached max cards: ", this.maxCards >= this.amiiboListComp().length -1);
+    return this.maxCards >= this.amiiboListComp().length -1;
+  }
+
+  isEmpty():boolean{
+    console.log("is empty: ", this.amiiboListComp().length === 0);
+    return this.amiiboListComp().length === 0;
+  }
+
   CallGetHTTP():void{
+    console.log("Calling Get HTTP");
     this.#http.get<Amiibo>(this.#URL+"?showusage")
     .pipe(
       retry(3),

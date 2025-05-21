@@ -6,3 +6,10 @@
     margin: 3%;
     justify-content: center;
 }
+
+.update_button{
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;     /* Centra verticalmente (opzionale) */
+  height: 100px; 
+}
