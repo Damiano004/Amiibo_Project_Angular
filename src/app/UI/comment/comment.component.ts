@@ -1,11 +1,12 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { PanelModule } from 'primeng/panel';
+import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss'],
-  imports: [PanelModule]
+  imports: [PanelModule, DividerModule]
 })
 export class CommentComponent {
   readonly user = input.required<string>();

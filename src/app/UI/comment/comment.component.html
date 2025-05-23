@@ -1,12 +1,15 @@
-<p-panel class="user_class">
-    <ng-template #header>
-      <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <i class="pi pi-user" style="font-size: 2.5rem;"></i>
-        <span>{{user()}}</span>
+<div style="margin-bottom: 1%">
+  <p-panel class="user_class">
+      <ng-template #header>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i class="pi pi-user" style="font-size: 2.5rem;"></i>
+          <span>{{user()}}</span>
+        </div>
+      </ng-template>
+      <div class="m-0">
+        <p class="title_class">{{title()}}</p>
+        <p-divider type="solid" />
+        <p class="body_class">{{body()}}</p>
       </div>
-    </ng-template>
-    <div class="m-0">
-       <p class="title_class">{{title()}}</p>
-       <p class="body_class">{{body()}}</p>
-    </div>
-</p-panel>
+  </p-panel>
+</div>

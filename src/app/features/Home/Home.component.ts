@@ -6,12 +6,22 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FormsModule } from '@angular/forms';
 import { Card } from '../../Core/Models/Card.model';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 
 @Component({
   selector: 'app-Home',
   templateUrl: './Home.component.html',
-  imports: [AmiiboCardComponent, ButtonModule, InputGroupModule, InputGroupAddonModule, FormsModule],
+  imports: [
+    AmiiboCardComponent,
+    ButtonModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    FormsModule,
+    IconFieldModule,
+    InputIconModule
+  ],
   styleUrls: ['./Home.component.scss']
 })
 export class HomeComponent{

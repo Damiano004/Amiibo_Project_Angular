@@ -1,9 +1,11 @@
-<p-inputgroup>
-+    <p-inputgroup-addon>
-+        <i class="pi pi-user"></i>
-+    </p-inputgroup-addon>
-+    <input pInputText [(ngModel)]="query" placeholder="Username" />
-+</p-inputgroup>
+<div class="search_bar">
+  <p-inputgroup [style]="{width: '30%'}">
+      <p-inputgroup-addon>
+          <i class="pi pi-search"></i>
+      </p-inputgroup-addon>
+      <input pInputText [(ngModel)]="query" placeholder="SEARCH" [style]="{width: '100%'}"/>
+  </p-inputgroup>
+</div>
 <div class="amiibo_container">
   @let amiibos = callSearchForAmiibo();
   @for (card of amiibos; track $index) {
@@ -13,6 +15,12 @@
   }
 </div>
 <div class="update_button">
-  <p-button label="SHOW MORE"  icon="pi pi-refresh" iconPos="bottom" (onClick)="cardManagerService.showMoreCards()" [disabled]="! activateButton()"/>
+  <p-button
+    label="SHOW MORE"
+    icon="pi pi-refresh"
+    iconPos="bottom"
+    (onClick)="cardManagerService.showMoreCards()"
+    [disabled]="! activateButton()"
+    [style]="{width: '300px'}"/>
 </div>
 

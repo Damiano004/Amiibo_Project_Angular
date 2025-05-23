@@ -9,7 +9,13 @@
 
 .update_button{
   display: flex;
-  justify-content: center; /* Centra orizzontalmente */
-  align-items: center;     /* Centra verticalmente (opzionale) */
-  height: 100px; 
+  justify-content: center;
+  height: 100px;
+}
+
+.search_bar{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 7%;
 }
