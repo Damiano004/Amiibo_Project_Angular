@@ -3,8 +3,9 @@
       <p-inputgroup-addon>
           <i class="pi pi-search"></i>
       </p-inputgroup-addon>
-      <input pInputText [(ngModel)]="query" placeholder="SEARCH" [style]="{width: '100%'}"/>
+      <input pInputText [(ngModel)]="amiiboName" placeholder="SEARCH" [style]="{width: '100%'}"/>
   </p-inputgroup>
+  <p-select [options]="games" [(ngModel)]="gameName" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
 </div>
 <div class="amiibo_container">
   @let amiibos = callSearchForAmiibo();

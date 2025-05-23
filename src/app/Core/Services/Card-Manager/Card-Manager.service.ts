@@ -28,7 +28,10 @@ export class CardManagerService {
   #amiiboList = signal<Card[]>([]);
   readonly #http = inject(HttpClient);
 
-  amiiboListComp = computed(() => this.#amiiboList());
+  amiiboListComp = computed(() =>
+    this.#amiiboList().sort
+      ((a, b) => a.name.localeCompare(b.name))
+    );
 
   GetAmiiboFromID(head: string, tail: string):Card{
     this.#amiiboList().forEach((amiibo)  =>{
@@ -41,9 +44,12 @@ export class CardManagerService {
     return amiibo;
   }
 
-  showAmiibos(name: string):Card[]{
-    let showingAmiibos: Card[] = this.SearchAmiibo(name);
+  showAmiibos(game: string, name: string):Card[]{
+    let showingAmiibos: Card[] = this.amiiboListComp();
     let cappedMaxCards: number = this.maxCards;
+
+    showingAmiibos = this.FilterByGame(game, showingAmiibos);
+    showingAmiibos = this.SearchAmiibo(name, showingAmiibos);
 
     if(showingAmiibos.length === 0){
       console.log("showingAmiibos is empty");
@@ -72,9 +78,18 @@ export class CardManagerService {
     return out;
   }
 
-  SearchAmiibo(name: string): Card[]{
-    return this.amiiboListComp().filter(card =>
+  SearchAmiibo(name: string, list: Card[]): Card[]{
+    return list.filter(card =>
       card.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  FilterByGame(game: string, list: Card[]): Card[]{
+    if(game === "All"){
+      return list;
+    }
+    return list.filter(card =>
+      card.gameSeries.toLowerCase() === game.toLowerCase()
     );
   }
 

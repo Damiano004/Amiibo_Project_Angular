@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Card } from '../../Core/Models/Card.model';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { SelectModule } from 'primeng/select';
 
 
 @Component({
@@ -20,13 +21,16 @@ import { InputIconModule } from 'primeng/inputicon';
     InputGroupAddonModule,
     FormsModule,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    SelectModule
   ],
   styleUrls: ['./Home.component.scss']
 })
 export class HomeComponent{
   readonly cardManagerService = inject(CardManagerService);
-  query: string = "";
+  amiiboName: string = "";
+  gameName: string = "All";
+  games: string[] = ["All", "Super Mario", "Animal Crossing", "Fire Emblem"];
 
   activateButton(): boolean{
     let out = !this.cardManagerService.reachedMaxCards() && !this.cardManagerService.isEmpty();
@@ -34,10 +38,8 @@ export class HomeComponent{
     return out;
   }
 
-
-
   callSearchForAmiibo(): Card[]{
-    console.log("query value: ", this.query);
-    return this.cardManagerService.showAmiibos(this.query);
+    console.log("amiiboName: ", this.amiiboName, "gameName: ", this.gameName);
+    return this.cardManagerService.showAmiibos(this.gameName,this.amiiboName);
   }
 }
