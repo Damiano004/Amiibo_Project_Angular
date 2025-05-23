@@ -41,16 +41,19 @@ export class CardManagerService {
     return amiibo;
   }
 
-  getSplicedCards():Card[]{
-    if(this.amiiboListComp().length == 0){
-      console.log("abiiboListComp is empty");
+  showAmiibos(name: string):Card[]{
+    let showingAmiibos: Card[] = this.SearchAmiibo(name);
+    let cappedMaxCards: number = this.maxCards;
+
+    if(showingAmiibos.length === 0){
+      console.log("showingAmiibos is empty");
       return [];
     }
-    console.log("sto facendo robe :D "+this.maxCards)
-    if(this.maxCards>=this.amiiboListComp().length){
-      this.maxCards = this.amiiboListComp().length -1;
+    console.log("Max cards: ",this.maxCards,"\nshowingAmiibo length: ",showingAmiibos.length)
+    if(this.maxCards>=showingAmiibos.length){
+      cappedMaxCards = showingAmiibos.length;
     }
-    return this.amiiboListComp().slice(0,this.maxCards);
+    return showingAmiibos.slice(0,cappedMaxCards);
   }
 
   showMoreCards(): void{
@@ -58,13 +61,21 @@ export class CardManagerService {
   }
 
   reachedMaxCards():boolean{
-    console.log("reached max cards: ", this.maxCards >= this.amiiboListComp().length -1);
-    return this.maxCards >= this.amiiboListComp().length -1;
+    let out: boolean = this.maxCards >= this.amiiboListComp().length -1;
+    console.log("reached max cards: ", out);
+    return out;
   }
 
   isEmpty():boolean{
-    console.log("is empty: ", this.amiiboListComp().length === 0);
-    return this.amiiboListComp().length === 0;
+    let out: boolean = this.amiiboListComp().length === 0;
+    console.log("is empty: ", out);
+    return out;
+  }
+
+  SearchAmiibo(name: string): Card[]{
+    return this.amiiboListComp().filter(card =>
+      card.name.toLowerCase().includes(name.toLowerCase())
+    );
   }
 
   CallGetHTTP():void{

@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './features/Home/Home.component';
 import { NotFoundComponent } from './features/Not-Found/Not-Found.component';
-import { DettagliComponent } from './features/Dettagli/Dettagli.component';
 
 export const routes: Routes = [
   {

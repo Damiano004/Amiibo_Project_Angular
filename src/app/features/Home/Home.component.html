@@ -1,5 +1,11 @@
+<p-inputgroup>
++    <p-inputgroup-addon>
++        <i class="pi pi-user"></i>
++    </p-inputgroup-addon>
++    <input pInputText [(ngModel)]="query" placeholder="Username" />
++</p-inputgroup>
 <div class="amiibo_container">
-  @let amiibos = cardManagerService.getSplicedCards();
+  @let amiibos = callSearchForAmiibo();
   @for (card of amiibos; track $index) {
     <app-amiibo-card [card]="card"></app-amiibo-card>
   }@empty {
