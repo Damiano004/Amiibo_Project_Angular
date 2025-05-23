@@ -9,6 +9,7 @@ import { Card } from '../../Core/Models/Card.model';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
+import { TabViewModule } from 'primeng/tabview';
 
 
 @Component({
@@ -22,7 +23,8 @@ import { SelectModule } from 'primeng/select';
     FormsModule,
     IconFieldModule,
     InputIconModule,
-    SelectModule
+    SelectModule,
+    TabViewModule
   ],
   styleUrls: ['./Home.component.scss']
 })
@@ -30,6 +32,7 @@ export class HomeComponent{
   readonly cardManagerService = inject(CardManagerService);
   amiiboName: string = "";
   gameName: string = "All";
+  startingIndex: number = 0;
   games: string[] = ["All", "Super Mario", "Animal Crossing", "Fire Emblem"];
 
   activateButton(): boolean{

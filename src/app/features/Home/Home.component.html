@@ -7,6 +7,11 @@
   </p-inputgroup>
   <p-select [options]="games" [(ngModel)]="gameName" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
 </div>
+<p-tabView [(activeIndex)]="startingIndex">
+    <p-tabPanel *ngFor="let game of games" [header]="game">
+        <p>Search for amiibo</p>
+    </p-tabPanel>
+</p-tabView>
 <div class="amiibo_container">
   @let amiibos = callSearchForAmiibo();
   @for (card of amiibos; track $index) {
