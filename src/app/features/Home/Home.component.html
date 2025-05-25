@@ -5,14 +5,14 @@
       </p-inputgroup-addon>
       <input pInputText [(ngModel)]="amiiboName" placeholder="SEARCH" [style]="{width: '100%'}"/>
   </p-inputgroup>
-  <p-select [options]="games" [(ngModel)]="gameName" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
 </div>
-<p-tabView [(activeIndex)]="startingIndex">
-    <p-tabPanel *ngFor="let game of games" [header]="game">
-        <p>Search for amiibo</p>
-    </p-tabPanel>
-</p-tabView>
-<div class="amiibo_container">
+<p-tabView (onChange)="setNewGameFilter($event)">
+@for (game of cardManagerService.gameList; track $index){
+    <p-tabPanel [header]="game">
+        <!-- <p>
+          {{ gameName }}
+        </p> -->
+        <div class="amiibo_container">
   @let amiibos = callSearchForAmiibo();
   @for (card of amiibos; track $index) {
     <app-amiibo-card [card]="card"></app-amiibo-card>
@@ -29,4 +29,7 @@
     [disabled]="! activateButton()"
     [style]="{width: '300px'}"/>
 </div>
+    </p-tabPanel>
+}
+</p-tabView>
 

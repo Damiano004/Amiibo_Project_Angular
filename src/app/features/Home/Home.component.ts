@@ -31,9 +31,9 @@ import { TabViewModule } from 'primeng/tabview';
 export class HomeComponent{
   readonly cardManagerService = inject(CardManagerService);
   amiiboName: string = "";
-  gameName: string = "All";
+  gameIndex: number = 0;
   startingIndex: number = 0;
-  games: string[] = ["All", "Super Mario", "Animal Crossing", "Fire Emblem"];
+
 
   activateButton(): boolean{
     let out = !this.cardManagerService.reachedMaxCards() && !this.cardManagerService.isEmpty();
@@ -41,8 +41,15 @@ export class HomeComponent{
     return out;
   }
 
+  setNewGameFilter(event: any): void {
+    console.log("Evend index: ",event.index);
+    this.gameIndex = event.index;
+    console.log("resetting maxCards to 51");
+    this.cardManagerService.maxCards = 51;
+    }
+
   callSearchForAmiibo(): Card[]{
-    console.log("amiiboName: ", this.amiiboName, "gameName: ", this.gameName);
-    return this.cardManagerService.showAmiibos(this.gameName,this.amiiboName);
+    console.log("amiiboName: ", this.amiiboName, "gameIndex: ", this.gameIndex);
+    return this.cardManagerService.showAmiibos(this.gameIndex,this.amiiboName);
   }
 }

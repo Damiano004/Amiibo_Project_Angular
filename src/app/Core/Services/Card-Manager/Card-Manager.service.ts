@@ -9,7 +9,6 @@ import { Amiibo } from '../../Models/Amiibo.model';
 })
 export class CardManagerService {
   maxCards: number = 51;
-  //readonly showingAmiibos = signal<Amiibo>;
 
   readonly #defaultCard: Card = {
     head: "-1",
@@ -27,6 +26,18 @@ export class CardManagerService {
   #URL = "https://www.amiiboapi.com/api/amiibo/";
   #amiiboList = signal<Card[]>([]);
   readonly #http = inject(HttpClient);
+  readonly gameList: string[] = [
+    "ALL",
+    "SUPER MARIO",
+    "ANIMAL CROSSING",
+    "FIRE EMBLEM",
+    "THE LEGEND OF ZELDA",
+    "MARIO SPORTS SUPERSTARS",
+    "MONSTER HUNTER",
+    "SPLATOON",
+    "POKEMON",
+    "OTHER"
+  ];
 
   amiiboListComp = computed(() =>
     this.#amiiboList().sort
@@ -44,11 +55,16 @@ export class CardManagerService {
     return amiibo;
   }
 
-  showAmiibos(game: string, name: string):Card[]{
+  showAmiibos(gameIndex: number, name: string):Card[]{
     let showingAmiibos: Card[] = this.amiiboListComp();
     let cappedMaxCards: number = this.maxCards;
 
-    showingAmiibos = this.FilterByGame(game, showingAmiibos);
+    if(gameIndex < 0 || gameIndex >= this.gameList.length){
+      console.log("Invalid game index setting to 0");
+      gameIndex = 0;
+    }
+
+    showingAmiibos = this.FilterByGame(gameIndex, showingAmiibos);
     showingAmiibos = this.SearchAmiibo(name, showingAmiibos);
 
     if(showingAmiibos.length === 0){
@@ -84,9 +100,15 @@ export class CardManagerService {
     );
   }
 
-  FilterByGame(game: string, list: Card[]): Card[]{
-    if(game === "All"){
+  FilterByGame(gameIndex: number, list: Card[]): Card[]{
+    let game: string = this.gameList[gameIndex].toLowerCase();
+    if(game === "all"){
       return list;
+    }
+    if(game === "other"){
+      return list.filter(card =>
+        !this.gameList.includes(card.gameSeries.toUpperCase())
+      );
     }
     return list.filter(card =>
       card.gameSeries.toLowerCase() === game.toLowerCase()
