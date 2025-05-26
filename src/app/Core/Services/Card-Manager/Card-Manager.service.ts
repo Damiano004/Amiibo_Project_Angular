@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Card } from '../../Models/Card.model';
 import { HttpClient } from '@angular/common/http';
-import { catchError, max, of, retry } from 'rxjs';
+import { catchError, of, retry } from 'rxjs';
 import { Amiibo } from '../../Models/Amiibo.model';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class CardManagerService {
   readonly #http = inject(HttpClient);
 
   maxCards: number = 51;
-  readonly gameList: string[] = [
+  readonly gameList = signal<string[]>([
     "ALL",
     "SUPER MARIO",
     "ANIMAL CROSSING",
@@ -35,7 +35,7 @@ export class CardManagerService {
     "SPLATOON",
     "POKEMON",
     "OTHER"
-  ];
+  ]);
 
   amiiboListComp = computed(() =>
     this.#amiiboList().sort
@@ -53,8 +53,8 @@ export class CardManagerService {
     let showingAmiibos: Card[] = this.amiiboListComp();
     let cappedMaxCards: number = this.maxCards;
 
-    if(gameIndex < 0 || gameIndex >= this.gameList.length){
-      console.log("Invalid game index setting to 0");
+    if(gameIndex < 0 || gameIndex >= this.gameList().length){
+      console.log("Invalid game index",gameIndex ?? ""," setting to 0");
       gameIndex = 0;
     }
 
@@ -100,12 +100,12 @@ export class CardManagerService {
   }
 
   FilterByGame(gameIndex: number, list: Card[]): Card[]{
-    let game: string = this.gameList[gameIndex].toLowerCase();
+    let game: string = this.gameList()[gameIndex].toLowerCase();
 
     if(game === "all") return list;
     if(game === "other"){
       return list.filter(card =>
-        !this.gameList.includes(card.gameSeries.toUpperCase())
+        !this.gameList().includes(card.gameSeries.toUpperCase())
       );
     }
     return list.filter(card =>

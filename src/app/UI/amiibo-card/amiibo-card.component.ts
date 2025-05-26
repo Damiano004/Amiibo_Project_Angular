@@ -1,6 +1,5 @@
-import { CardManagerService } from './../../Core/Services/Card-Manager/Card-Manager.service';
 import { TabStateManagerService } from './../../Core/Services/Tab-State-Manager/Tab-State-Manager.service';
-import { Component, inject, input, OnInit} from '@angular/core';
+import { Component, inject, input} from '@angular/core';
 import { Card } from '../../Core/Models/Card.model';
 import { Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
@@ -13,19 +12,17 @@ import { CardModule } from 'primeng/card';
 })
 export class AmiiboCardComponent{
   readonly card = input.required<Card>();
+  readonly amiiboName = input.required<string>();
   readonly gameIndex = input.required<number>();
   readonly router = inject(Router);
-  readonly cabStateManagerService = inject(TabStateManagerService);
-  readonly cardManagerService = inject(CardManagerService);
-
+  readonly tabStateManagerService = inject(TabStateManagerService);
 
   saveState():void{
     let state = {
       gameIndex: this.gameIndex(),
-      scrollTop: window.scrollY,
-      maxCards: this.cardManagerService.maxCards,
+      amiiboName: this.amiiboName()
     }
-    this.cabStateManagerService.setState(state);
+    this.tabStateManagerService.setState(state);
   }
 
   goToDetails(head: string, tail: string){

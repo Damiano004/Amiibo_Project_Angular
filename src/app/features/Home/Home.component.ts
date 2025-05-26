@@ -1,5 +1,5 @@
 import { TabStateManagerService } from './../../Core/Services/Tab-State-Manager/Tab-State-Manager.service';
-import { Component, inject, NgZone, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manager.service';
 import { AmiiboCardComponent } from '../../UI/amiibo-card/amiibo-card.component';
 import { ButtonModule } from 'primeng/button';
@@ -33,22 +33,20 @@ export class HomeComponent implements OnInit {
   readonly cardManagerService = inject(CardManagerService);
   readonly TabStateManagerService = inject(TabStateManagerService);
 
-  amiiboName: string = "";
-  gameIndex: number = 0;
+  amiiboName = signal<string>("");
+  gameIndex = signal<number>(0);
 
   ngOnInit(): void {
     this.restoreTabState();
   }
 
-  constructor(private ngZone: NgZone) {}
-
   restoreTabState(): void {
     let state = this.TabStateManagerService.getState();
 
     console.log("Restoring tab state: ", state);
-    this.gameIndex = state.gameIndex;
-    this.cardManagerService.maxCards = state.maxCards;
-    
+    this.gameIndex.set(state.gameIndex);
+    this.amiiboName.set(state.amiiboName);
+
   }
 
   activateButton(): boolean{
@@ -59,13 +57,13 @@ export class HomeComponent implements OnInit {
 
   setNewGameFilter(event: any): void {
     console.log("Evend index: ",event.index);
-    this.gameIndex = event.index;
+    this.gameIndex.set(event.index);
     console.log("resetting maxCards to 51");
     this.cardManagerService.maxCards = 51;
     }
 
   callSearchForAmiibo(): Card[]{
-    console.log("amiiboName: ", this.amiiboName, "gameIndex: ", this.gameIndex);
-    return this.cardManagerService.showAmiibos(this.gameIndex,this.amiiboName);
+    console.log("amiiboName: ", this.amiiboName(), "gameIndex: ", this.gameIndex());
+    return this.cardManagerService.showAmiibos(this.gameIndex(),this.amiiboName());
   }
 }

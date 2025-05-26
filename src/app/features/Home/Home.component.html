@@ -10,13 +10,13 @@
   (onChange)="setNewGameFilter($event)"
   [scrollable]="true"
   [style]="{margin: '3%'}"
-  [activeIndex]="gameIndex">
-  @for (game of cardManagerService.gameList; track $index){
+  [activeIndex]="gameIndex()">
+  @for (game of cardManagerService.gameList(); track $index){
     <p-tabPanel [header]="game">
       <div class="amiibo_container">
         @let amiibos = callSearchForAmiibo();
         @for (card of amiibos; track $index) {
-          <app-amiibo-card [card]="card" [gameIndex]="gameIndex"/>
+          <app-amiibo-card [card]="card" [gameIndex]="gameIndex()" [amiiboName]="amiiboName()"/>
         }@empty {
             <h1>NO AMIIBO FOUND, PLEASE WAIT...</h1>
         }
