@@ -48,9 +48,7 @@ export class HomeComponent implements OnInit {
     console.log("Restoring tab state: ", state);
     this.gameIndex = state.gameIndex;
     this.cardManagerService.maxCards = state.maxCards;
-    this.ngZone.onStable.pipe().subscribe(() => {
-      window.scrollTo({ top: state.scrollTop, behavior: 'smooth' });
-    });
+    
   }
 
   activateButton(): boolean{

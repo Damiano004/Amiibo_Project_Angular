@@ -1,5 +1,5 @@
 export interface TabState{
   gameIndex:number;
-  scrollTop:number;
+  amiiboName:string;
   maxCards:number;
 }

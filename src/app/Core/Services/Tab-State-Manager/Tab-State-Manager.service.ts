@@ -7,7 +7,7 @@ import { TabState } from '../../Models/TabState';
 export class TabStateManagerService {
   private state: TabState ={
     gameIndex: 0,
-    scrollTop: 0,
+    amiiboName: "",
     maxCards: 51
   }
 
