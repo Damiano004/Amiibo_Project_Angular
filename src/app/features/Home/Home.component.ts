@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { TabStateManagerService } from './../../Core/Services/Tab-State-Manager/Tab-State-Manager.service';
+import { Component, inject, OnInit } from '@angular/core';
 import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manager.service';
 import { AmiiboCardComponent } from '../../UI/amiibo-card/amiibo-card.component';
 import { ButtonModule } from 'primeng/button';
@@ -28,12 +29,24 @@ import { TabViewModule } from 'primeng/tabview';
   ],
   styleUrls: ['./Home.component.scss']
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit {
   readonly cardManagerService = inject(CardManagerService);
+  readonly TabStateManagerService = inject(TabStateManagerService);
+
   amiiboName: string = "";
   gameIndex: number = 0;
-  startingIndex: number = 0;
 
+  ngOnInit(): void {
+    this.restoreTabState();
+  }
+
+  restoreTabState(): void {
+    let state = this.TabStateManagerService.getState();
+    console.log("Restoring tab state: ", state);
+    this.gameIndex = state.gameIndex;
+    this.cardManagerService.maxCards = state.maxCards;
+    window.scrollTo({ top: state.scrollTop, behavior: 'smooth' });
+  }
 
   activateButton(): boolean{
     let out = !this.cardManagerService.reachedMaxCards() && !this.cardManagerService.isEmpty();

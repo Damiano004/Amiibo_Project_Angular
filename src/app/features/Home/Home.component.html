@@ -6,15 +6,19 @@
       <input pInputText [(ngModel)]="amiiboName" placeholder="SEARCH" [style]="{width: '100%'}"/>
   </p-inputgroup>
 </div>
-<p-tabView (onChange)="setNewGameFilter($event)" [scrollable]="true" [style]="{margin: '3%'}">
+<p-tabView
+  (onChange)="setNewGameFilter($event)"
+  [scrollable]="true"
+  [style]="{margin: '3%'}"
+  [activeIndex]="gameIndex">
   @for (game of cardManagerService.gameList; track $index){
     <p-tabPanel [header]="game">
       <div class="amiibo_container">
         @let amiibos = callSearchForAmiibo();
         @for (card of amiibos; track $index) {
-          <app-amiibo-card [card]="card"/>
+          <app-amiibo-card [card]="card" [gameIndex]="gameIndex"/>
         }@empty {
-          <h1>NESSUN AMIIBO TROVATO, ATTENDERE...</h1>
+            <h1>NO AMIIBO FOUND, PLEASE WAIT...</h1>
         }
       </div>
       <div class="update_button">

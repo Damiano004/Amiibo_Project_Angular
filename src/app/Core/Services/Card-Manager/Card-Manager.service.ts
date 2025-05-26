@@ -1,15 +1,13 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Card } from '../../Models/Card.model';
 import { HttpClient } from '@angular/common/http';
-import { catchError, of, retry } from 'rxjs';
+import { catchError, max, of, retry } from 'rxjs';
 import { Amiibo } from '../../Models/Amiibo.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardManagerService {
-  maxCards: number = 51;
-
   readonly #defaultCard: Card = {
     head: "-1",
     tail: "-1",
@@ -20,12 +18,12 @@ export class CardManagerService {
     gamesSwitch: [],
     gamesWiiU: []
   }
-
   #defaultAmiiboList: Amiibo = {amiibo: [this.#defaultCard]}
-
   #URL = "https://www.amiiboapi.com/api/amiibo/";
   #amiiboList = signal<Card[]>([]);
   readonly #http = inject(HttpClient);
+
+  maxCards: number = 51;
   readonly gameList: string[] = [
     "ALL",
     "SUPER MARIO",
@@ -77,6 +75,10 @@ export class CardManagerService {
 
   showMoreCards(): void{
     this.maxCards+=51;
+  }
+
+  setMaxCards(newMax: number): void{
+    this.maxCards = newMax;
   }
 
   reachedMaxCards():boolean{

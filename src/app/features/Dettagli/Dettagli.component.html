@@ -1,6 +1,4 @@
-
 @let amiiboDetail = cardMangerSrv.GetAmiiboFromID(head,tail);
-<!--<button (click)="commentManagerSrv.AddComment(amiiboDetail.head+amiiboDetail.tail, {'user':'utente','body':'corpo','title':'titolo'})">Add comment</button> -->
 
 @if (amiiboDetail.head == "-1" || amiiboDetail.tail == "-1"){
   <h1>HEAD: {{amiiboDetail.head}}</h1>
