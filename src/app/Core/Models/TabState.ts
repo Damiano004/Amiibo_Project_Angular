@@ -1,4 +1,4 @@
 export interface TabState{
-  gameIndex:number;
+  gameName:string;
   amiiboName:string;
 }

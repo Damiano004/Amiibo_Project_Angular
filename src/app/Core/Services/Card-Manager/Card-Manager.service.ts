@@ -49,16 +49,16 @@ export class CardManagerService {
     return amiibo;
   }
 
-  showAmiibos(gameIndex: number, name: string):Card[]{
+  showAmiibos(gameName: string, name: string):Card[]{
     let showingAmiibos: Card[] = this.amiiboListComp();
     let cappedMaxCards: number = this.maxCards;
 
-    if(gameIndex < 0 || gameIndex >= this.gameList().length){
-      console.log("Invalid game index",gameIndex ?? ""," setting to 0");
-      gameIndex = 0;
+    if(gameName === undefined || gameName === null){
+      console.log("Invalid game name");
+      gameName = "all";
     }
 
-    showingAmiibos = this.FilterByGame(gameIndex, showingAmiibos);
+    showingAmiibos = this.FilterByGame(gameName, showingAmiibos);
     showingAmiibos = this.SearchAmiibo(name, showingAmiibos);
 
     if(showingAmiibos.length === 0){
@@ -99,17 +99,15 @@ export class CardManagerService {
     );
   }
 
-  FilterByGame(gameIndex: number, list: Card[]): Card[]{
-    let game: string = this.gameList()[gameIndex].toLowerCase();
-
-    if(game === "all") return list;
-    if(game === "other"){
+  private FilterByGame(gameName: string, list: Card[]): Card[]{
+    if(gameName.toLowerCase() === "all") return list;
+    if(gameName === "other"){
       return list.filter(card =>
         !this.gameList().includes(card.gameSeries.toUpperCase())
       );
     }
     return list.filter(card =>
-      card.gameSeries.toLowerCase() === game.toLowerCase()
+      card.gameSeries.toLowerCase() === gameName.toLowerCase()
     );
   }
 

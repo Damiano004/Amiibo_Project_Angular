@@ -10,7 +10,7 @@ import { Card } from '../../Core/Models/Card.model';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 
 
 @Component({
@@ -25,7 +25,7 @@ import { TabViewModule } from 'primeng/tabview';
     IconFieldModule,
     InputIconModule,
     SelectModule,
-    TabViewModule
+    TabsModule
   ],
   styleUrls: ['./Home.component.scss']
 })
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   readonly TabStateManagerService = inject(TabStateManagerService);
 
   amiiboName = signal<string>("");
-  gameIndex = signal<number>(0);
+  gameName = signal<string>("ALL");
 
   ngOnInit(): void {
     this.restoreTabState();
@@ -44,9 +44,8 @@ export class HomeComponent implements OnInit {
     let state = this.TabStateManagerService.getState();
 
     console.log("Restoring tab state: ", state);
-    this.gameIndex.set(state.gameIndex);
     this.amiiboName.set(state.amiiboName);
-
+    this.gameName.set(state.gameName);
   }
 
   activateButton(): boolean{
@@ -56,14 +55,13 @@ export class HomeComponent implements OnInit {
   }
 
   setNewGameFilter(event: any): void {
-    console.log("Evend index: ",event.index);
-    this.gameIndex.set(event.index);
+    this.gameName.set(event);
     console.log("resetting maxCards to 51");
     this.cardManagerService.maxCards = 51;
-    }
+  }
 
   callSearchForAmiibo(): Card[]{
-    console.log("amiiboName: ", this.amiiboName(), "gameIndex: ", this.gameIndex());
-    return this.cardManagerService.showAmiibos(this.gameIndex(),this.amiiboName());
+    console.log("amiiboName: ", this.amiiboName(), "gameName: ", this.gameName());
+    return this.cardManagerService.showAmiibos(this.gameName(),this.amiiboName());
   }
 }

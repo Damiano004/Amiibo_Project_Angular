@@ -13,13 +13,13 @@ import { CardModule } from 'primeng/card';
 export class AmiiboCardComponent{
   readonly card = input.required<Card>();
   readonly amiiboName = input.required<string>();
-  readonly gameIndex = input.required<number>();
+  readonly gameName = input.required<string>();
   readonly router = inject(Router);
   readonly tabStateManagerService = inject(TabStateManagerService);
 
   saveState():void{
     let state = {
-      gameIndex: this.gameIndex(),
+      gameName: this.gameName(),
       amiiboName: this.amiiboName()
     }
     this.tabStateManagerService.setState(state);

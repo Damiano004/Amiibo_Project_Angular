@@ -6,7 +6,7 @@ import { TabState } from '../../Models/TabState';
 })
 export class TabStateManagerService {
   private state: TabState ={
-    gameIndex: 0,
+    gameName: "ALL",
     amiiboName: ""
   }
 
