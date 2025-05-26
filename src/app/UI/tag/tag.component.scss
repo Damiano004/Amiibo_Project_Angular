@@ -10,7 +10,6 @@
   background-color: rgb(179, 2, 2);
   color: white;
   padding: 0.01rem;
-  text-align: center;
   display: block;
   font-size: 2rem;
   font-weight: bold;
@@ -25,9 +24,13 @@
   background-color: white;
   height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   font-size: 1.8rem;
   font-weight: bold;
   color: black;
+}
+
+p{
+  width: 100%;
+  text-align: center;
 }
