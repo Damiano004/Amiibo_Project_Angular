@@ -45,10 +45,6 @@ export class CardManagerService {
     );
 
   GetAmiiboFromID(head: string, tail: string):Card{
-    this.#amiiboList().forEach((amiibo)  =>{
-      let amiiboId;
-      amiiboId = amiibo.head + amiibo.tail;
-    })
     console.log("[received] Amiibo head: "+head+" Amiibo tail: "+tail);
     let amiibo: Card = this.#amiiboList().find(p => p.head === head && p.tail === tail) ?? this.#defaultCard;
     console.log("Amiibo name: "+amiibo.name+" Amiibo head: "+amiibo.head+" Amiibo tail: "+amiibo.tail);
@@ -71,6 +67,7 @@ export class CardManagerService {
       console.log("showingAmiibos is empty");
       return [];
     }
+
     console.log("Max cards: ",this.maxCards,"\nshowingAmiibo length: ",showingAmiibos.length)
     if(this.maxCards>=showingAmiibos.length){
       cappedMaxCards = showingAmiibos.length;
@@ -102,9 +99,8 @@ export class CardManagerService {
 
   FilterByGame(gameIndex: number, list: Card[]): Card[]{
     let game: string = this.gameList[gameIndex].toLowerCase();
-    if(game === "all"){
-      return list;
-    }
+
+    if(game === "all") return list;
     if(game === "other"){
       return list.filter(card =>
         !this.gameList.includes(card.gameSeries.toUpperCase())

@@ -6,30 +6,27 @@
       <input pInputText [(ngModel)]="amiiboName" placeholder="SEARCH" [style]="{width: '100%'}"/>
   </p-inputgroup>
 </div>
-<p-tabView (onChange)="setNewGameFilter($event)">
-@for (game of cardManagerService.gameList; track $index){
+<p-tabView (onChange)="setNewGameFilter($event)" [scrollable]="true" [style]="{margin: '3%'}">
+  @for (game of cardManagerService.gameList; track $index){
     <p-tabPanel [header]="game">
-        <!-- <p>
-          {{ gameName }}
-        </p> -->
-        <div class="amiibo_container">
-  @let amiibos = callSearchForAmiibo();
-  @for (card of amiibos; track $index) {
-    <app-amiibo-card [card]="card"></app-amiibo-card>
-  }@empty {
-    <h1>NESSUN AMIIBO TROVATO, ATTENDERE...</h1>
-  }
-</div>
-<div class="update_button">
-  <p-button
-    label="SHOW MORE"
-    icon="pi pi-refresh"
-    iconPos="bottom"
-    (onClick)="cardManagerService.showMoreCards()"
-    [disabled]="! activateButton()"
-    [style]="{width: '300px'}"/>
-</div>
+      <div class="amiibo_container">
+        @let amiibos = callSearchForAmiibo();
+        @for (card of amiibos; track $index) {
+          <app-amiibo-card [card]="card"/>
+        }@empty {
+          <h1>NESSUN AMIIBO TROVATO, ATTENDERE...</h1>
+        }
+      </div>
+      <div class="update_button">
+        <p-button
+          label="SHOW MORE"
+          icon="pi pi-refresh"
+          iconPos="bottom"
+          (onClick)="cardManagerService.showMoreCards()"
+          [disabled]="! activateButton()"
+          [style]="{width: '300px'}"/>
+      </div>
     </p-tabPanel>
-}
+  }
 </p-tabView>
 

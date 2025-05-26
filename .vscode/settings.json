@@ -1,0 +1,23 @@
+{
+"restoreTerminals.terminals": [
+  //git
+  {
+    "splitTerminals": [
+      {
+        "name": "git",
+        "commands": ["& 'C:\\Program Files\\Git\\bin\\bash.exe' -i -c \" exec bash\""]
+      }
+    ]
+  },
+  // Angular
+  {
+    "splitTerminals": [
+      {
+        "name": "angular",
+        "commands": ["npm run start"]
+      }
+    ]
+  }
+]
+}
+
