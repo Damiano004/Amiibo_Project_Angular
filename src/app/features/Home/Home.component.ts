@@ -50,13 +50,12 @@ export class HomeComponent implements OnInit {
 
   activateButton(): boolean{
     let out = !this.cardManagerService.reachedMaxCards() && !this.cardManagerService.isEmpty();
-    console.log("Activate button: ", out);
     return out;
   }
 
   setNewGameFilter(event: any): void {
     this.gameName.set(event);
-    console.log("resetting maxCards to 51");
+    console.log("[003] resetting maxCards to 51");
     this.cardManagerService.maxCards = 51;
   }
 

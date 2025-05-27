@@ -9,9 +9,9 @@
 <p-tabs
   [value]="gameName()"
   (valueChange)="setNewGameFilter($event)"
-  [scrollable]="true"
+  scrollable
   [style]="{margin: '3%'}">
-    <p-tablist>
+    <p-tablist style="padding-right: 3%;">
         @for (game of cardManagerService.gameList(); track $index) {
           <p-tab [value]="game">{{ game }}</p-tab>
         }

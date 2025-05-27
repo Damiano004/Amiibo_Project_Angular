@@ -11,7 +11,7 @@ export class TabStateManagerService {
   }
 
   setState(newState: TabState): void {
-    console.log("Setting new tab state: ", newState);
+    console.log("[001] Setting new tab state: ", newState);
     this.state = newState;
   }
 
