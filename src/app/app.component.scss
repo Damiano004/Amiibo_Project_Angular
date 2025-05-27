@@ -1,1 +1,28 @@
+.header_style{
+  background-color: red;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.logo_style{
+  width: 160px;
+  object-fit: contain;
+  margin-left: 10px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+}
+
+.app_name_style{
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  letter-spacing: 2px;
+}
