@@ -1,5 +1,5 @@
 import { TabStateManagerService } from './../../Core/Services/Tab-State-Manager/Tab-State-Manager.service';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manager.service';
 import { AmiiboCardComponent } from '../../UI/amiibo-card/amiibo-card.component';
 import { ButtonModule } from 'primeng/button';
@@ -63,5 +63,15 @@ export class HomeComponent implements OnInit {
   callSearchForAmiibo(): Card[]{
     console.log("amiiboName: ", this.amiiboName(), "gameName: ", this.gameName());
     return this.cardManagerService.showAmiibos(this.gameName(),this.amiiboName());
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollPosition >= pageHeight) {
+      this.cardManagerService.showMoreCards();
+    }
   }
 }
