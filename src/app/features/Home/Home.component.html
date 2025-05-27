@@ -30,7 +30,7 @@
             icon="pi pi-refresh"
             iconPos="bottom"
             (onClick)="cardManagerService.showMoreCards()"
-            [disabled]="! activateButton()"
+            [hidden]="!activateButton()"
             [style]="{width: '300px'}"/>
         </div>
 </p-tabs>

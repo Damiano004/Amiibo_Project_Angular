@@ -8,6 +8,7 @@ import { Amiibo } from '../../Models/Amiibo.model';
   providedIn: 'root'
 })
 export class CardManagerService {
+  // dati base
   readonly #defaultCard: Card = {
     head: "-1",
     tail: "-1",
@@ -22,8 +23,13 @@ export class CardManagerService {
   #URL = "https://www.amiiboapi.com/api/amiibo/";
   #amiiboList = signal<Card[]>([]);
   readonly #http = inject(HttpClient);
-
+  amiiboListComp = computed(() =>
+  this.#amiiboList().sort
+    ((a, b) => a.name.localeCompare(b.name))
+  );
+  // dati gestione visualizzazione cards
   maxCards: number = 51;
+  // dati gestione filtri
   readonly gameList = signal<string[]>([
     "ALL",
     "SUPER MARIO",
@@ -36,79 +42,14 @@ export class CardManagerService {
     "POKEMON",
     "OTHER"
   ]);
+  #showingAmiibos: Card[] = [];
 
-  amiiboListComp = computed(() =>
-    this.#amiiboList().sort
-      ((a, b) => a.name.localeCompare(b.name))
-    );
-
+  // funzioni base
   GetAmiiboFromID(head: string, tail: string):Card{
     console.log("[received] Amiibo head: "+head+" Amiibo tail: "+tail);
     let amiibo: Card = this.#amiiboList().find(p => p.head === head && p.tail === tail) ?? this.#defaultCard;
     console.log("Amiibo name: "+amiibo.name+" Amiibo head: "+amiibo.head+" Amiibo tail: "+amiibo.tail);
     return amiibo;
-  }
-
-  showAmiibos(gameName: string, name: string):Card[]{
-    let showingAmiibos: Card[] = this.amiiboListComp();
-    let cappedMaxCards: number = this.maxCards;
-
-    if(gameName === undefined || gameName === null){
-      console.log("Invalid game name");
-      gameName = "all";
-    }
-
-    showingAmiibos = this.FilterByGame(gameName, showingAmiibos);
-    showingAmiibos = this.SearchAmiibo(name, showingAmiibos);
-
-    if(showingAmiibos.length === 0){
-      console.log("showingAmiibos is empty");
-      return [];
-    }
-
-    console.log("Max cards: ",this.maxCards,"\nshowingAmiibo length: ",showingAmiibos.length)
-    if(this.maxCards>=showingAmiibos.length){
-      cappedMaxCards = showingAmiibos.length;
-    }
-    return showingAmiibos.slice(0,cappedMaxCards);
-  }
-
-  showMoreCards(): void{
-    this.maxCards+=51;
-  }
-
-  setMaxCards(newMax: number): void{
-    this.maxCards = newMax;
-  }
-
-  reachedMaxCards():boolean{
-    let out: boolean = this.maxCards >= this.amiiboListComp().length -1;
-    console.log("reached max cards: ", out);
-    return out;
-  }
-
-  isEmpty():boolean{
-    let out: boolean = this.amiiboListComp().length === 0;
-    console.log("is empty: ", out);
-    return out;
-  }
-
-  SearchAmiibo(name: string, list: Card[]): Card[]{
-    return list.filter(card =>
-      card.name.toLowerCase().includes(name.toLowerCase())
-    );
-  }
-
-  private FilterByGame(gameName: string, list: Card[]): Card[]{
-    if(gameName.toLowerCase() === "all") return list;
-    if(gameName === "other"){
-      return list.filter(card =>
-        !this.gameList().includes(card.gameSeries.toUpperCase())
-      );
-    }
-    return list.filter(card =>
-      card.gameSeries.toLowerCase() === gameName.toLowerCase()
-    );
   }
 
   CallGetHTTP():void{
@@ -126,4 +67,75 @@ export class CardManagerService {
       this.#amiiboList.update(() => [...this.#amiiboList(),...amiiboList.amiibo]);
     });
   }
+  // --------------------------------
+
+  // funzioni gestione visualizzazione cards
+    showMoreCards(): void{
+    this.maxCards+=51;
+  }
+
+  setMaxCards(newMax: number): void{
+    this.maxCards = newMax;
+  }
+
+  reachedMaxCards():boolean{
+    console.log("[003] Checking if", this.maxCards, " >= ", this.#showingAmiibos.length - 1);
+    let out: boolean = this.maxCards >= this.#showingAmiibos.length -1;
+    console.log("[003] reached max cards: ", out);
+    return out;
+  }
+
+  isEmpty():boolean{
+    console.log("[003] Checking if",this.#showingAmiibos.length,"=== 0");
+    let out: boolean = this.#showingAmiibos.length === 0;
+    console.log("[003] is empty: ", out);
+    return out;
+  }
+  // --------------------------------
+
+  // funzioni gestione filtri
+  showAmiibos(gameName: string, name: string):Card[]{
+    this.#showingAmiibos = this.amiiboListComp();
+    let cappedMaxCards: number = this.maxCards;
+
+    if(gameName === undefined || gameName === null){
+      console.log("[002] Invalid game name");
+      gameName = "all";
+    }
+
+    this.#showingAmiibos = this.FilterByGame(gameName, this.#showingAmiibos);
+    this.#showingAmiibos = this.SearchAmiibo(name, this.#showingAmiibos);
+
+    if(this.#showingAmiibos.length === 0){
+      console.log("[002] this.#showingAmiibos is empty");
+      return [];
+    }
+
+    console.log("[003] Max cards: ",this.maxCards,"\nshowingAmiibo length: ",this.#showingAmiibos.length)
+    if(this.maxCards>=this.#showingAmiibos.length){
+      cappedMaxCards = this.#showingAmiibos.length;
+    }
+    return this.#showingAmiibos.slice(0,cappedMaxCards);
+  }
+
+  SearchAmiibo(name: string, list: Card[]): Card[]{
+    console.log("[002] Searching for amiibo with name: ", name);
+    return list.filter(card =>
+      card.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  private FilterByGame(gameName: string, list: Card[]): Card[]{
+    console.log("[002] Filtering by game: ", gameName);
+    if(gameName.toLowerCase() === "all") return list;
+    if(gameName.toLowerCase() === "other"){
+      return list.filter(card =>
+        !this.gameList().includes(card.gameSeries.toUpperCase())
+      );
+    }
+    return list.filter(card =>
+      card.gameSeries.toLowerCase() === gameName.toLowerCase()
+    );
+  }
+  // --------------------------------
 }

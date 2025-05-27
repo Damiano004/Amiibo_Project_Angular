@@ -70,7 +70,8 @@ export class HomeComponent implements OnInit {
     const scrollPosition = window.scrollY + window.innerHeight;
     const pageHeight = document.documentElement.scrollHeight;
 
-    if (scrollPosition >= pageHeight) {
+    if (scrollPosition >= pageHeight && this.activateButton()) {
+      console.log("[003] Reached bottom of the page, showing more cards");
       this.cardManagerService.showMoreCards();
     }
   }
