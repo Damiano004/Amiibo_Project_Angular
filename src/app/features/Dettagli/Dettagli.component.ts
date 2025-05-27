@@ -39,11 +39,17 @@ export class DettagliComponent implements OnInit{
     this.form.reset();
   }
 
+  activateButton(): boolean{
+    return(
+      this.form.value.uName !== "" &&
+      this.form.value.title !== "" &&
+      this.form.value.body !== "");
+  }
+
   ngOnInit(): void {
     this.#router.paramMap.subscribe(param=> {
       this.head = param.get("head") ?? "-1";
       this.tail = param.get("tail") ?? "-1";
-
     })
 
     this.form = new FormGroup(  {

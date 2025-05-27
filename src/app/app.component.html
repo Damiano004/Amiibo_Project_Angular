@@ -1,3 +1,14 @@
-<button [routerLink]="['..']" routerLinkActive="router-link-active" >HOME</button>
-<h1>Amiibo App</h1>
+<div style="background-color: red; position: fixed; z-index: 1000; width: 100%; height: 80px; display: flex; align-items: center; justify-content: center;">
+  <img
+    src="/logo.png"
+    style="width: 160px; object-fit: contain; margin-left: 10px; cursor: pointer; position: absolute; left: 0;"
+    [routerLink]="['..']"
+    alt="logo"/>
+
+  <h1 style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 2.5rem; font-weight: 700; color: white; margin: 0; letter-spacing: 2px;">
+    AmiiboApp
+  </h1>
+</div>
+
+<div style="padding-top: 160px;"></div>
 <router-outlet/>

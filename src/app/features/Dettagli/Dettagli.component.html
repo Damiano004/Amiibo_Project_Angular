@@ -26,23 +26,23 @@
         <p-inputgroup-addon>
           <i class="pi pi-user"></i>
         </p-inputgroup-addon>
-        <input  formControlName="uName" id="uName" placeholder="Username" />
+        <input formControlName="uName" id="uName" placeholder="Username" autocomplete="off"/>
       </p-inputgroup>
 
       <p-inputgroup>
         <p-inputgroup-addon>
           <i class="pi pi-tag"></i>
         </p-inputgroup-addon>
-        <input formControlName="title" id="title" placeholder="Title" />
+        <input formControlName="title" id="title" placeholder="Title" autocomplete="off"/>
       </p-inputgroup>
     </div>
 
     <p-floatlabel variant="in">
-      <textarea pTextarea id="body" formControlName="body" rows="5" cols="60" style="resize: none" class="h-full"></textarea>
+      <textarea pTextarea id="body" formControlName="body" rows="5" cols="60" style="resize: none" class="h-full" autocomplete="off"></textarea>
       <label for="body">Body</label>
     </p-floatlabel>
     <br>
-    <p-button (onClick)="sendComment()" label="Submit"/>
+    <p-button (onClick)="sendComment()" [disabled]="!activateButton()" label="Submit"/>
   </form>
   <br><br>
   @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail).comments; track $index) {
