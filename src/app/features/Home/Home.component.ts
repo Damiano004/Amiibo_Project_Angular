@@ -12,7 +12,6 @@ import { InputIconModule } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { TabsModule } from 'primeng/tabs';
 
-
 @Component({
   selector: 'app-Home',
   templateUrl: './Home.component.html',
@@ -30,16 +29,22 @@ import { TabsModule } from 'primeng/tabs';
   styleUrls: ['./Home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  // Servizio per la gestione delle card
   readonly cardManagerService = inject(CardManagerService);
+  // Servizio per la gestione dello stato delle tab
   readonly TabStateManagerService = inject(TabStateManagerService);
 
+  // Signal per il nome dell'amiibo
   amiiboName = signal<string>("");
+  // Signal per il filtro del gioco
   gameName = signal<string>("ALL");
 
+  // Al caricamento del componente, ripristina lo stato delle tab
   ngOnInit(): void {
     this.restoreTabState();
   }
 
+  // Funzione per ilripristino dello stato delle tab
   restoreTabState(): void {
     let state = this.TabStateManagerService.getState();
 
@@ -48,22 +53,26 @@ export class HomeComponent implements OnInit {
     this.gameName.set(state.gameName);
   }
 
+  // Attiva il pulsante solo se non sono state raggiunte le card massime e la lista non è vuota
   activateButton(): boolean{
     let out = !this.cardManagerService.reachedMaxCards() && !this.cardManagerService.isEmpty();
     return out;
   }
 
+  // Imposta un nuovo filtro di gioco e resetta il numero massimo di card
   setNewGameFilter(event: any): void {
     this.gameName.set(event);
     console.log("[003] resetting maxCards to 51");
     this.cardManagerService.maxCards = 51;
   }
 
+  // Esegue la ricerca degli amiibo in base ai filtri selezionati
   callSearchForAmiibo(): Card[]{
     console.log("amiiboName: ", this.amiiboName(), "gameName: ", this.gameName());
     return this.cardManagerService.showAmiibos(this.gameName(),this.amiiboName());
   }
 
+  // Listener per lo scroll della finestra: se si raggiunge il fondo, mostra più card
   @HostListener('window:scroll')
   onWindowScroll(): void {
     const scrollPosition = window.scrollY + window.innerHeight;

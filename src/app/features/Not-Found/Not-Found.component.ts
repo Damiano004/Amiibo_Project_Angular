@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-Not-Found',
@@ -6,7 +6,4 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./Not-Found.component.scss']
 })
 export class NotFoundComponent{
-
-  constructor() { }
-  
 }

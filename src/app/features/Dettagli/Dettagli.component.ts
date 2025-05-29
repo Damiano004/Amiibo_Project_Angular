@@ -39,17 +39,24 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DettagliComponent implements OnInit {
+  // Servizio per la gestione delle card
   readonly cardMangerSrv = inject(CardManagerService);
+  // Servizio per la gestione dei commenti
   readonly commentManagerSrv = inject(CommentManagerService);
+  // Router per ottenere i parametri dalla route attiva
   readonly #router = inject(ActivatedRoute);
 
+  // Form per l'inserimento dei commenti
   form!: FormGroup;
 
+  // Identificativi della card
   head: string = '';
   tail: string = '';
 
+  // Nome della card (input dal componente padre)
   readonly name = input<string>();
 
+  // Invia un nuovo commento utilizzando il servizio CommentManagerService
   sendComment(): void {
     let comment = this.form.value;
     console.log('Sending comment: ' + comment.uName);
@@ -57,6 +64,7 @@ export class DettagliComponent implements OnInit {
     this.form.reset();
   }
 
+  // Attiva il pulsante di invio solo se tutti i campi sono compilati
   activateButton(): boolean {
     return (
       this.form.value.uName !== '' &&
@@ -65,6 +73,7 @@ export class DettagliComponent implements OnInit {
     );
   }
 
+  // Inizializza il componente e il form, recupera i parametri dalla route
   ngOnInit(): void {
     this.#router.paramMap.subscribe((param) => {
       this.head = param.get('head') ?? '-1';
