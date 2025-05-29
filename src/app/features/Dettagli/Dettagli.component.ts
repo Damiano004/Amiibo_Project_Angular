@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CardManagerService } from '../../Core/Services/Card-Manager/Card-Manager.service';
 import { UsageTableComponent } from '../../UI/UsageTable/UsageTable.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommentManagerService } from '../../Core/Services/Comment-Manager/Comment-Manager.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommentComponent } from '../../UI/comment/comment.component';
@@ -34,6 +34,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     FloatLabelModule,
     TagComponent,
     ProgressSpinnerModule,
+    RouterLink
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
