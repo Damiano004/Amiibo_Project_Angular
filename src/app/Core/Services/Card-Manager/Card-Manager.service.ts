@@ -67,6 +67,10 @@ export class CardManagerService {
       this.#amiiboList.update(() => [...this.#amiiboList(),...amiiboList.amiibo]);
     });
   }
+
+  isAmiiboListEmpty(): boolean{
+    return this.amiiboListComp().length === 0;
+  }
   // --------------------------------
 
   // funzioni gestione visualizzazione cards

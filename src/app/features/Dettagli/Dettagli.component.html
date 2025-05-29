@@ -1,53 +1,94 @@
-@let amiiboDetail = cardMangerSrv.GetAmiiboFromID(head,tail);
-
-@if (amiiboDetail.head == "-1" || amiiboDetail.tail == "-1"){
-  <h1>HEAD: {{amiiboDetail.head}}</h1>
-  <h1>TAIL: {{amiiboDetail.tail}}</h1>
-  <h1>NAME: {{amiiboDetail.name}}</h1>
+@let amiiboDetail = cardMangerSrv.GetAmiiboFromID(head,tail); @if
+(amiiboDetail.head == "-1" || amiiboDetail.tail == "-1"){
+<div class="loading_spinner">
+  <p-progress-spinner
+    strokeWidth="8"
+    fill="transparent"
+    animationDuration=".5s"
+    [style]="{ width: '50px', height: '50px' }"
+  />
+</div>
 }@else {
-  <br><br>
-  <div class="details">
-    <div class="name_from">
-      <app-tag tag_name="NAME" [tag_body]="amiiboDetail.name"/>
-      <app-tag tag_name="FROM" [tag_body]="amiiboDetail.gameSeries"/>
-    </div>
-    <img [src]="amiiboDetail.image" alt="" height="600px" width="600px">
+<br /><br />
+<div class="details">
+  <div class="name_from">
+    <app-tag tag_name="NAME" [tag_body]="amiiboDetail.name" />
+    <app-tag tag_name="FROM" [tag_body]="amiiboDetail.gameSeries" />
   </div>
-  <br><br>
+  <img [src]="amiiboDetail.image" alt="" height="600px" width="600px" />
+</div>
+<br /><br />
 
-  <app-UsageTable [tableName]="'Nintendo switch games'" [tableData]="amiiboDetail.gamesSwitch"/>
-  <app-UsageTable [tableName]="'Nintendo 3DS games'" [tableData]="amiiboDetail.games3DS"/>
-  <app-UsageTable [tableName]="'Nintendo WIIU games'" [tableData]="amiiboDetail.gamesWiiU"/>
-  <br><br>
+<app-UsageTable
+  [tableName]="'Nintendo switch games'"
+  [tableData]="amiiboDetail.gamesSwitch"
+/>
+<app-UsageTable
+  [tableName]="'Nintendo 3DS games'"
+  [tableData]="amiiboDetail.games3DS"
+/>
+<app-UsageTable
+  [tableName]="'Nintendo WIIU games'"
+  [tableData]="amiiboDetail.gamesWiiU"
+/>
+<br /><br />
 
-  <form [formGroup]="form" class="form">
-    <div class="user_title">
-      <p-inputgroup>
-        <p-inputgroup-addon>
-          <i class="pi pi-user"></i>
-        </p-inputgroup-addon>
-        <input formControlName="uName" id="uName" placeholder="Username" autocomplete="off"/>
-      </p-inputgroup>
+<form [formGroup]="form" class="form">
+  <div class="user_title">
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-user"></i>
+      </p-inputgroup-addon>
+      <input
+        formControlName="uName"
+        id="uName"
+        placeholder="Username"
+        autocomplete="off"
+      />
+    </p-inputgroup>
 
-      <p-inputgroup>
-        <p-inputgroup-addon>
-          <i class="pi pi-tag"></i>
-        </p-inputgroup-addon>
-        <input formControlName="title" id="title" placeholder="Title" autocomplete="off"/>
-      </p-inputgroup>
-    </div>
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-tag"></i>
+      </p-inputgroup-addon>
+      <input
+        formControlName="title"
+        id="title"
+        placeholder="Title"
+        autocomplete="off"
+      />
+    </p-inputgroup>
+  </div>
 
-    <p-floatlabel variant="in">
-      <textarea pTextarea id="body" formControlName="body" rows="5" cols="60" style="resize: none" class="h-full" autocomplete="off"></textarea>
-      <label for="body">Body</label>
-    </p-floatlabel>
-    <br>
-    <p-button (onClick)="sendComment()" [disabled]="!activateButton()" label="Submit"/>
-  </form>
-  <br><br>
-  @for (comment of commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail).comments; track $index) {
-    <app-comment [user]="comment.uName" [title]="comment.title" [body]="comment.body"/>
-  }@empty {
-    <h1>NO COMMENTS ABOUT THIS AMIIBO</h1>
-  }
-}
+  <p-floatlabel variant="in">
+    <textarea
+      pTextarea
+      id="body"
+      formControlName="body"
+      rows="5"
+      cols="60"
+      style="resize: none"
+      class="h-full"
+      autocomplete="off"
+    ></textarea>
+    <label for="body">Body</label>
+  </p-floatlabel>
+  <br />
+  <p-button
+    (onClick)="sendComment()"
+    [disabled]="!activateButton()"
+    label="Submit"
+  />
+</form>
+<br /><br />
+@for (comment of
+commentManagerSrv.GetComments(amiiboDetail.head+amiiboDetail.tail).comments;
+track $index) {
+<app-comment
+  [user]="comment.uName"
+  [title]="comment.title"
+  [body]="comment.body"
+/>
+}@empty {
+<h1>NO COMMENTS ABOUT THIS AMIIBO</h1>
+} }
